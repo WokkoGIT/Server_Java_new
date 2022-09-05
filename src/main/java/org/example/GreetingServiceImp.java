@@ -1,15 +1,17 @@
 package org.example;
 
-import GeneratedSources.GreetingServiceGrpc;
-import GeneratedSources.GreetingServiceOuterClass;
+import RefundService.GreetingServiceGrpc;
+import RefundService.RefundServiceOuterClass;
 import io.grpc.stub.StreamObserver;
 
 public class GreetingServiceImp extends GreetingServiceGrpc.GreetingServiceImplBase {
     @Override
-    public void greeting (GreetingServiceOuterClass.HelloRequest request,
-                          StreamObserver<GreetingServiceOuterClass.HelloResponse> responseObserver) {
-        System.out.println(request);
-        GreetingServiceOuterClass.HelloResponse response = GreetingServiceOuterClass.HelloResponse
+    public void greeting (RefundServiceOuterClass.HelloRequest request,
+                          StreamObserver<RefundServiceOuterClass.HelloResponse> responseObserver) {
+        System.out.println("--------------------\nПодключен новый клиент");
+        System.out.print(request);
+        System.out.println("--------------------");
+        RefundServiceOuterClass.HelloResponse response = RefundServiceOuterClass.HelloResponse
                 .newBuilder().setGreeting("Response from server to client: "+request.getName())
                 .build();
 
