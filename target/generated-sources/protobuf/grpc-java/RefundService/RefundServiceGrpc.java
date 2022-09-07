@@ -1,5 +1,7 @@
 package RefundService;
 
+import java.security.NoSuchAlgorithmException;
+
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
 import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
@@ -88,7 +90,7 @@ public final class RefundServiceGrpc {
     /**
      */
     public void refundRequest(RefundService.RefundServiceOuterClass.RefundRequest request,
-        io.grpc.stub.StreamObserver<RefundService.RefundServiceOuterClass.RefundResponse> responseObserver) {
+        io.grpc.stub.StreamObserver<RefundService.RefundServiceOuterClass.RefundResponse> responseObserver) throws NoSuchAlgorithmException {
       asyncUnimplementedUnaryCall(getRefundRequestMethod(), responseObserver);
     }
 
@@ -205,8 +207,12 @@ public final class RefundServiceGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_REFUND_REQUEST:
-          serviceImpl.refundRequest((RefundService.RefundServiceOuterClass.RefundRequest) request,
-              (io.grpc.stub.StreamObserver<RefundService.RefundServiceOuterClass.RefundResponse>) responseObserver);
+          try {
+            serviceImpl.refundRequest((RefundServiceOuterClass.RefundRequest) request,
+                (io.grpc.stub.StreamObserver<RefundServiceOuterClass.RefundResponse>) responseObserver);
+          } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+          }
           break;
         default:
           throw new AssertionError();
